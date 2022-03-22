@@ -1,0 +1,247 @@
+[
+{
+"adjective": "wise",
+"comparative": "wiser",
+"antonym": "more foolish"
+},
+{
+"adjective": "chatty",
+"comparative": "chattier",
+"antonym": "more quiet"
+},
+{
+"adjective": "quiet",
+"comparative": "more quiet",
+"antonym": "chattier"
+},
+{
+"adjective": "friendly",
+"comparative": "friendlier",
+"antonym": "more hostile"
+},
+{
+"adjective": "generous",
+"comparative": "more generous",
+"antonym": "stingier"
+},
+{
+"adjective": "funny",
+"comparative": "funnier",
+"antonym": "more serious"
+},
+{
+"adjective": "smart",
+"comparative": "smarter",
+"antonym": "duller"
+},
+{
+"adjective": "calm",
+"comparative": "calmer",
+"antonym": "more anxious"
+},
+{
+"adjective": "honest",
+"comparative": "more honest",
+"antonym": "less honest"
+},
+{
+"adjective": "lazy",
+"comparative": "lazier",
+"antonym": "more diligent"
+},
+{
+"adjective": "moody",
+"comparative": "moodier",
+"antonym": "more cheerful"
+},
+{
+"adjective": "popular",
+"comparative": "more popular",
+"antonym": "more unpopular"
+},
+{
+"adjective": "loud",
+"comparative": "louder",
+"antonym": "more silent"
+},
+{
+"adjective": "serious",
+"comparative": "more serious",
+"antonym": "more superficial"
+},
+{
+"adjective": "boastful",
+"comparative": "more boastful",
+"antonym": "more modest"
+},
+{
+"adjective": "lucky",
+"comparative": "luckier",
+"antonym": "more unfortunate"
+},
+{
+"adjective": "trendy",
+"comparative": "trendier",
+"antonym": "more unfashionable"
+},
+{
+"adjective": "bold",
+"comparative": "bolder",
+"antonym": "shyer"
+},
+{
+"adjective": "confident",
+"comparative": "more confident",
+"antonym": "more insecure"
+},
+{
+"adjective": "arrogant",
+"comparative": "more arrogant",
+"antonym": "humbler"
+},
+{
+"adjective": "beautiful",
+"comparative": "more beautiful",
+"antonym": "uglier"
+},
+{
+"adjective": "chic",
+"comparative": "more chic",
+"antonym": "more unfashionable"
+},
+{
+"adjective": "neat",
+"comparative": "neater",
+"antonym": "sloppier"
+},
+{
+"adjective": "edgy",
+"comparative": "edgier",
+"antonym": "calmer"
+},
+{
+"adjective": "tall",
+"comparative": "taller",
+"antonym": "shorter"
+},
+{
+"adjective": "short",
+"comparative": "shorter",
+"antonym": "taller"
+},
+{
+"adjective": "skinny",
+"comparative": "skinnier",
+"antonym": "chunkier"
+},
+{
+"adjective": "slender",
+"comparative": "slenderer",
+"antonym": "chubbier"
+},
+{
+"adjective": "fat",
+"comparative": "fatter",
+"antonym": "skinnier"
+},
+{
+"adjective": "bald",
+"comparative": "balder",
+"antonym": "more hairy"
+},
+{
+"adjective": "thick",
+"comparative": "thicker",
+"antonym": "slenderer"
+},
+{
+"adjective": "thin",
+"comparative": "thinner",
+"antonym": "tubbier"
+},
+{
+"adjective": "brave",
+"comparative": "braver",
+"antonym": "cowardlier"
+},
+{
+"adjective": "stubborn",
+"comparative": "stubborner",
+"antonym": "more obedient"
+},
+{
+"adjective": "loyal",
+"comparative": "more loyal",
+"antonym": "more treacherous"
+},
+{
+"adjective": "selfish",
+"comparative": "more selfish",
+"antonym": "altruistic"
+},
+{
+"adjective": "respectful",
+"comparative": "more respectful",
+"antonym": "more disrespectful"
+},
+{
+"adjective": "creative",
+"comparative": "creativer",
+"antonym": "uncreativer"
+},
+{
+"adjective": "independent",
+"comparative": "more independent",
+"antonym": "more dependent"
+},
+{
+"adjective": "carefree",
+"comparative": "more carefree",
+"antonym": "more anxious"
+},
+{
+"adjective": "mischievous",
+"comparative": "more mischievous",
+"antonym": "more obedient"
+},
+{
+"adjective": "daring",
+"comparative": "more daring",
+"antonym": "more cautious"
+},
+{
+"adjective": "successful",
+"comparative": "more successful",
+"antonym": "more unsuccessful"
+},
+{
+"adjective": "loving",
+"comparative": "more loving",
+"antonym": "colder"
+},
+{
+"adjective": "curious",
+"comparative": "more curious",
+"antonym": "more indifferent"
+},
+{
+"adjective": "handsome",
+"comparative": "handsomer",
+"antonym": "uglier"
+},
+{
+"adjective": "strong",
+"comparative": "stronger",
+"antonym": "weaker"
+},
+{
+"adjective": "old",
+"comparative": "older",
+"antonym": "younger"
+},
+{
+"adjective": "young",
+"comparative": "younger",
+"antonym": "older"
+}
+]
