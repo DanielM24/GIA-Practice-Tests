@@ -9,6 +9,7 @@ class PerceptualSpeed:
         self.upper_row = []
         self.lower_row = []
         self.report = []
+        self.questions = 0
         self.answer = 0
         self.user_answer = 0
         self.score = 0
@@ -32,6 +33,7 @@ class PerceptualSpeed:
             if pair[0] not in self.upper_row and pair[1] not in self.lower_row:
                 self.upper_row.append(pair[0])
                 self.lower_row.append(pair[1])
+        self.questions += 1
         if randint(0, 1) == 0:
             self.upper_row = [letter.upper() for letter in self.upper_row]
         else:

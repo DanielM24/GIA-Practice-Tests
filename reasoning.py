@@ -14,6 +14,7 @@ class Reasoning:
         self.adjective = ""
         self.user_answer = ""
         self.answer = ""
+        self.questions = 0
         self.situation = 0
         self.score = 0
         with open('resources/adjectives.json') as adjectives_file:
@@ -30,6 +31,7 @@ class Reasoning:
             self.phrase = f"{self.person_1} {self.adverb} {self.adjective['adjective']} as {self.person_2}."
 
     def get_question(self):
+        self.questions += 1
         self.situation = randint(0, 1)
         if self.situation == 0:
             self.question = f"Who is {self.adjective['antonym']}?"

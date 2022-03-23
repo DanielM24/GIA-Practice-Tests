@@ -18,21 +18,49 @@ FONT_NAME = "Georgia"
 TIMER = None
 timer_label = None
 GAME_WINDOW = None
-
+exercise = 0
 
 # TODO: Show score and ask user if they want to save a report of the test
 # ---------------------------- GAME INFO ------------------------------- #
 def show_score():
-    global GAME_WINDOW
-    messagebox.askyesno(title="End of the test", message='info_message')
+    global GAME_WINDOW, exercise
+    if exercise == 1:
+        message = f"""    Your final score is: {reasoning.score} / {reasoning.questions}.
+
+    Do you want to download a report for the ‘REASONING’ test?
+        """
+    elif exercise == 2:
+        message = f"""    Your final score is: {perceptual_speed.score} / {perceptual_speed.questions}.
+
+    Do you want to download a report for the ‘PERCEPTUAL SPEED’ test?
+        """
+    elif exercise == 3:
+        message = f"""    Your final score is: {number_speed.score} / {number_speed.questions}.
+    
+    Do you want to download a report for the ‘NUMBER, SPEED & ACCURACY’ test?
+        """
+    else:
+        message = f"""    Your final score is: {spatial_visualisation.score} / {spatial_visualisation.questions}.
+    
+    Do you want to download a report for the ‘SPATIAL VISUALISATION’ test?
+        """
     GAME_WINDOW.destroy()
-    pass
+    if messagebox.askyesno(title="End of the test", message=message):
+        if exercise == 1:
+            pass
+        elif exercise == 2:
+            pass
+        elif exercise == 3:
+            pass
+        else:
+            pass
+    else:
+        pass
 
 
 # ---------------------------- TIMER ------------------------------- #
 def countdown_timer(count):
-    global GAME_WINDOW
-    global TIMER
+    global GAME_WINDOW, TIMER
     minutes = str(count // 60).rjust(2, '0')
     seconds = str(count % 60).rjust(2, '0')
     timer_label.config(text=f"TIME: {minutes}:{seconds}")
@@ -94,8 +122,10 @@ def show_phase():
 
 
 def reasoning_game():
-    global timer_label
-    global GAME_WINDOW
+    global GAME_WINDOW, timer_label, exercise
+    exercise = 1
+    reasoning.score = 0
+    reasoning.questions = 0
     info_message = """    Each question is about comparing two people.
     You can study this statement for as long as you need to understand it fully.
     When you are ready you must click the mouse. When you have done this the statement will disappear and a question about the statement will be shown together with two possible answers.
@@ -114,7 +144,7 @@ def reasoning_game():
     timer_label.grid(row=0, column=1)
 
     show_phase()
-    countdown_timer(3 * 60)
+    countdown_timer(10)
 
 
 # ---------------------------- PERCEPTUAL SPEED ------------------------------- #
@@ -138,8 +168,10 @@ def show_letters(letters_label: Label):
 
 
 def perceptual_speed_game():
-    global GAME_WINDOW
-    global timer_label
+    global GAME_WINDOW, timer_label, exercise
+    exercise = 2
+    perceptual_speed.score = 0
+    perceptual_speed.questions = 0
     info_message = """    In this test, you will see four pairs of letters. Each pair has been put into its own box.
     You must decide how many pairs contain letters that are the same.
 
@@ -186,7 +218,7 @@ def perceptual_speed_game():
     timer_label.grid(row=0, column=5)
 
     show_letters(letters_label)
-    countdown_timer(4 * 60)
+    countdown_timer(10)
 
 
 # ---------------------------- NUMBER SPEED & ACCURACY ------------------------------- #
@@ -210,8 +242,10 @@ def show_numbers(option_0: Button, option_1: Button, option_2: Button):
 
 
 def number_speed_game():
-    global GAME_WINDOW
-    global timer_label
+    global GAME_WINDOW, timer_label, exercise
+    exercise = 3
+    number_speed.score = 0
+    number_speed.questions = 0
     info_message = """    For each problem presented, start by finding the largest and the smallest of the three numbers displayed.
     Having identified those, decide whether the largest or the smallest is further away from the remaining number.
 
@@ -244,7 +278,7 @@ def number_speed_game():
     timer_label.grid(row=0, column=3)
 
     show_numbers(option_0, option_1, option_2)
-    countdown_timer(3 * 60)
+    countdown_timer(10)
 
 
 # ---------------------------- SPATIAL VISUALISATION ------------------------------- #
@@ -289,8 +323,10 @@ def show_images(pairs: list[Label]):
 
 
 def spatial_visualisation_game():
-    global GAME_WINDOW
-    global timer_label
+    global GAME_WINDOW, timer_label, exercise
+    exercise = 4
+    spatial_visualisation.score = 0
+    spatial_visualisation.questions = 0
     pairs = []
     info_message = """    This test is designed to see how quickly you can turn shapes around in your head.
     The challenge is to see how many boxes contain two shapes that are the same.
@@ -340,7 +376,7 @@ def spatial_visualisation_game():
     timer_label.grid(row=0, column=5)
 
     show_images(pairs)
-    countdown_timer(5 * 60)
+    countdown_timer(10)
 
 
 # ---------------------------- MAIN MENU ------------------------------- #

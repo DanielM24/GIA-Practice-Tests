@@ -7,6 +7,7 @@ class SpatialVisualisation:
         self.answer = None
         self.user_answer = None
         self.pairs = None
+        self.questions = 0
         self.score = 0
 
     def get_non_matching_r(self):
@@ -23,6 +24,7 @@ class SpatialVisualisation:
 
     def get_pairs(self):
         self.answer = randint(0, 2)
+        self.questions += 1
         self.pairs = []
         if self.answer == 0:
             while len(self.pairs) < 2:

@@ -6,6 +6,7 @@ class NumberSpeedAccuracy:
     def __init__(self):
         self.numbers = []
         self.report = []
+        self.questions = 0
         self.answer = 0
         self.user_answer = 0
         self.score = 0
@@ -24,6 +25,7 @@ class NumberSpeedAccuracy:
                 or self.numbers[2] - self.numbers[1] == self.numbers[1] - self.numbers[0]:
             self.numbers = sorted(sample(range(2, 30), 3))
         shuffle(self.numbers)
+        self.questions += 1
 
     def find_answer(self):
         """ Find whether the largest or the smallest number from the list
