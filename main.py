@@ -6,6 +6,9 @@ from perceptual_speed import PerceptualSpeed
 from number_speed import NumberSpeedAccuracy
 from spatial_visualisation import SpatialVisualisation
 
+import numpy as np
+import PIL
+
 # ---------------------------- COLORS ------------------------------- #
 CHAMPAGNE_PINK = "#F2DFD7"
 GHOST_WHITE = "#FEF9FF"
@@ -19,8 +22,9 @@ TIMER = None
 timer_label = None
 GAME_WINDOW = None
 exercise = 0
+image_pairs = None
 
-# TODO: Show score and ask user if they want to save a report of the test
+
 # ---------------------------- GAME INFO ------------------------------- #
 def show_score():
     global GAME_WINDOW, exercise
@@ -30,30 +34,31 @@ def show_score():
     Do you want to download a report for the ‘REASONING’ test?
         """
     elif exercise == 2:
-        message = f"""    Your final score is: {perceptual_speed.score} / {perceptual_speed.questions}.
+        message = f"""    Your final score is: {perceptual_speed.score} / {perceptual_speed.questions - 1}.
 
     Do you want to download a report for the ‘PERCEPTUAL SPEED’ test?
         """
     elif exercise == 3:
-        message = f"""    Your final score is: {number_speed.score} / {number_speed.questions}.
+        message = f"""    Your final score is: {number_speed.score} / {number_speed.questions - 1}.
     
     Do you want to download a report for the ‘NUMBER, SPEED & ACCURACY’ test?
         """
     else:
-        message = f"""    Your final score is: {spatial_visualisation.score} / {spatial_visualisation.questions}.
+        message = f"""    Your final score is: {spatial_visualisation.score} / {spatial_visualisation.questions - 1}.
     
     Do you want to download a report for the ‘SPATIAL VISUALISATION’ test?
         """
     GAME_WINDOW.destroy()
+
     if messagebox.askyesno(title="End of the test", message=message):
         if exercise == 1:
-            pass
+            reasoning.save_report()
         elif exercise == 2:
-            pass
+            perceptual_speed.save_report()
         elif exercise == 3:
-            pass
+            number_speed.save_report()
         else:
-            pass
+            spatial_visualisation.save_report()
     else:
         pass
 
@@ -75,6 +80,7 @@ reasoning = Reasoning()
 
 
 def check_option_r(question_label: Label, option_1: Button, option_2: Button, user_choice):
+    """ Check if the user has selected the correct answer."""
     question_label.destroy()
     option_1.destroy()
     option_2.destroy()
@@ -144,7 +150,7 @@ def reasoning_game():
     timer_label.grid(row=0, column=1)
 
     show_phase()
-    countdown_timer(10)
+    countdown_timer(3 * 60)
 
 
 # ---------------------------- PERCEPTUAL SPEED ------------------------------- #
@@ -152,6 +158,7 @@ perceptual_speed = PerceptualSpeed()
 
 
 def check_option_ps(letters_label: Label, user_choice):
+    """ Check if the user has selected the correct answer."""
     if perceptual_speed.check_answer(user_choice):
         perceptual_speed.score += 1
     # print(perceptual_speed.score)
@@ -218,7 +225,7 @@ def perceptual_speed_game():
     timer_label.grid(row=0, column=5)
 
     show_letters(letters_label)
-    countdown_timer(10)
+    countdown_timer(4 * 60)
 
 
 # ---------------------------- NUMBER SPEED & ACCURACY ------------------------------- #
@@ -226,6 +233,7 @@ number_speed = NumberSpeedAccuracy()
 
 
 def check_option_nsp(option_0: Button, option_1: Button, option_2: Button, user_choice):
+    """ Check if the user has selected the correct answer."""
     if number_speed.check_answer(user_choice):
         number_speed.score += 1
     # print(number_speed.score)
@@ -278,7 +286,7 @@ def number_speed_game():
     timer_label.grid(row=0, column=3)
 
     show_numbers(option_0, option_1, option_2)
-    countdown_timer(10)
+    countdown_timer(3 * 60)
 
 
 # ---------------------------- SPATIAL VISUALISATION ------------------------------- #
@@ -286,9 +294,12 @@ spatial_visualisation = SpatialVisualisation()
 
 
 def check_option_sv(pairs: list[Label], user_choice):
+    """ Check if the user has selected the correct answer."""
+    global image_pairs
     if spatial_visualisation.check_answer(user_choice):
         spatial_visualisation.score += 1
     # print(spatial_visualisation.score)
+    spatial_visualisation.add_report(image_pairs)
     show_images(pairs)
 
 
@@ -309,15 +320,31 @@ def draw_image(side, angle):
     return image
 
 
+def get_pairs_image(images: list):
+    """ Function which generates a picture of both pairs. """
+    global image_pairs
+    pairs_image_rows = []
+    for index in range(2):
+        pairs_image_row = np.hstack([images[index], images[index + 2]])
+        pairs_image_rows.append(pairs_image_row)
+    image_pairs = np.vstack([i for i in pairs_image_rows])
+    image_pairs = PIL.Image.fromarray(image_pairs)
+    image_pairs = image_pairs.resize((75, 75), resample=0)
+    # image_pairs.show()
+
+
 def show_images(pairs: list[Label]):
     spatial_visualisation.get_pairs()
     images = []
     for pair in spatial_visualisation.pairs:
         for letter in pair:
             image = draw_image(letter[0], letter[1])
-            image = ImageTk.PhotoImage(image)
             images.append(image)
+    # Create an image with both pairs together
+    get_pairs_image(images)
+
     for index in range(4):
+        images[index] = ImageTk.PhotoImage(images[index])
         pairs[index].image = images[index]
         pairs[index].config(image=images[index])
 
@@ -376,7 +403,7 @@ def spatial_visualisation_game():
     timer_label.grid(row=0, column=5)
 
     show_images(pairs)
-    countdown_timer(10)
+    countdown_timer(5 * 60)
 
 
 # ---------------------------- MAIN MENU ------------------------------- #
