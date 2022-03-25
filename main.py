@@ -109,7 +109,7 @@ def show_question(phrase_label: Label, question_button: Button):
 
     option_2 = Button(GAME_WINDOW, text=reasoning.person_2, highlightthickness=0)
     option_2.config(fg=CHAMPAGNE_PINK, bg=MEDIUM_SLATE_BLUE, font=(FONT_NAME, 16, "bold"), relief=GROOVE,
-                    command=lambda: check_option_r(question_label, option_1, option_2, reasoning.person_1))
+                    command=lambda: check_option_r(question_label, option_1, option_2, reasoning.person_2))
     option_2.grid(row=2, column=1, pady=10, padx=50, sticky="ew")
 
 
@@ -137,7 +137,7 @@ def reasoning_game():
     When you are ready you must click the mouse. When you have done this the statement will disappear and a question about the statement will be shown together with two possible answers.
     You must now move the mouse pointer to the box which contains the correct answer. When you have done this, the next question will appear and so on until the end of the test.
 
-    The REASONING test runs for about 3 minutes. """
+    The REASONING test runs for about 5 minutes. """
     messagebox.showinfo(title="The ‘REASONING’ test", message=info_message)
 
     GAME_WINDOW = Toplevel(main_menu)
@@ -150,7 +150,7 @@ def reasoning_game():
     timer_label.grid(row=0, column=1)
 
     show_phase()
-    countdown_timer(3 * 60)
+    countdown_timer(5 * 60)
 
 
 # ---------------------------- PERCEPTUAL SPEED ------------------------------- #
@@ -358,7 +358,7 @@ def spatial_visualisation_game():
     info_message = """    This test is designed to see how quickly you can turn shapes around in your head.
     The challenge is to see how many boxes contain two shapes that are the same.
 
-    The SPATIAL VISUALISATION test runs for about 5 minutes. """
+    The SPATIAL VISUALISATION test runs for about 3 minutes. """
 
     messagebox.showinfo(title="The ‘SPATIAL VISUALISATION’ test", message=info_message)
 
@@ -403,7 +403,7 @@ def spatial_visualisation_game():
     timer_label.grid(row=0, column=5)
 
     show_images(pairs)
-    countdown_timer(5 * 60)
+    countdown_timer(3 * 60)
 
 
 # ---------------------------- MAIN MENU ------------------------------- #

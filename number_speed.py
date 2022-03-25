@@ -49,8 +49,8 @@ class NumberSpeedAccuracy:
             - The difference between 2 numbers can't be the same.
         """
         self.numbers = []
-        self.numbers = sorted(sample(range(2, 30), 3))
-        while self.numbers[2] - self.numbers[0] > 10 \
+        self.numbers = sorted(sample(range(2, 28), 3))
+        while self.numbers[2] - self.numbers[0] > 9 \
                 or self.numbers[2] - self.numbers[1] < 2 \
                 or self.numbers[1] - self.numbers[0] < 2 \
                 or self.numbers[2] - self.numbers[1] == self.numbers[1] - self.numbers[0]:

@@ -127,7 +127,7 @@ class Reasoning:
         pdf.set_font('Times', 'B', 16)
         pdf.cell(180, 10, 'REASONING TEST REPORT', 0, 1, 'C')
         pdf.cell(180, 10, date_time, 0, 1, 'C')
-        pdf.cell(180, 10, f"Score: {self.score}/{self.questions - 1}", 0, 1, 'C')
+        pdf.cell(180, 10, f"Score: {self.score}/{self.questions}", 0, 1, 'C')
         pdf.ln(10)
 
         print_report_to_pdf(pdf, self.report)
