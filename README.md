@@ -31,7 +31,7 @@
     </br> 
     <p align="center">𝘛𝘦𝘴𝘵𝘴</p>
     <p align="center">
-  <a href=""> <img src="https://raw.githubusercontent.com/DanielM24/GIA-Practice-Tests/main/demo/tests.png" alt="gia-tests" width="550" height="550"/> </a>
+  <a href=""> <img src="https://raw.githubusercontent.com/DanielM24/GIA-Practice-Tests/main/demo/test.png" alt="gia-tests" width="650" height="550"/> </a>
     </p>
     </br> 
     <p align="center">𝘙𝘦𝘱𝘰𝘳𝘵𝘴</p>
