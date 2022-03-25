@@ -23,11 +23,11 @@ timer_label = None
 GAME_WINDOW = None
 exercise = 0
 image_pairs = None
+buttons = []
 
 
 # ---------------------------- GAME INFO ------------------------------- #
 def show_score():
-    global GAME_WINDOW, exercise
     if exercise == 1:
         message = f"""    Your final score is: {reasoning.score} / {reasoning.questions}.
 
@@ -48,6 +48,7 @@ def show_score():
     
     Do you want to download a report for the ‘SPATIAL VISUALISATION’ test?
         """
+    buttons_enable(buttons)
     GAME_WINDOW.destroy()
 
     if messagebox.askyesno(title="End of the test", message=message):
@@ -65,7 +66,7 @@ def show_score():
 
 # ---------------------------- TIMER ------------------------------- #
 def countdown_timer(count):
-    global GAME_WINDOW, TIMER
+    global TIMER
     minutes = str(count // 60).rjust(2, '0')
     seconds = str(count % 60).rjust(2, '0')
     timer_label.config(text=f"TIME: {minutes}:{seconds}")
@@ -73,6 +74,18 @@ def countdown_timer(count):
         TIMER = GAME_WINDOW.after(1000, countdown_timer, count - 1)
     else:
         show_score()
+
+
+# ---------------------------- BUTTONS ------------------------------- #
+def buttons_disable(menu_buttons):
+    for button in menu_buttons:
+        button.config(state=DISABLED)
+
+
+def buttons_enable(menu_buttons):
+    for button in menu_buttons:
+        button.config(state=NORMAL)
+    GAME_WINDOW.destroy()
 
 
 # ---------------------------- REASONING ------------------------------- #
@@ -91,7 +104,6 @@ def check_option_r(question_label: Label, option_1: Button, option_2: Button, us
 
 
 def show_question(phrase_label: Label, question_button: Button):
-    global GAME_WINDOW
     reasoning.get_question()
     reasoning.find_answer()
 
@@ -112,9 +124,10 @@ def show_question(phrase_label: Label, question_button: Button):
                     command=lambda: check_option_r(question_label, option_1, option_2, reasoning.person_2))
     option_2.grid(row=2, column=1, pady=10, padx=50, sticky="ew")
 
+    GAME_WINDOW.protocol("WM_DELETE_WINDOW", lambda: buttons_enable(menu_buttons=buttons))
+
 
 def show_phase():
-    global GAME_WINDOW
     reasoning.get_phrase()
 
     phrase_label = Label(GAME_WINDOW, text=reasoning.phrase, bg=GHOST_WHITE)
@@ -125,6 +138,8 @@ def show_phase():
     question_button.config(fg=CHAMPAGNE_PINK, bg=MEDIUM_SLATE_BLUE, font=(FONT_NAME, 16, "bold"), relief=GROOVE,
                            command=lambda: show_question(phrase_label, question_button))
     question_button.grid(row=2, column=0, columnspan=2, pady=20, padx=60, sticky="ew")
+
+    GAME_WINDOW.protocol("WM_DELETE_WINDOW", lambda: buttons_enable(menu_buttons=buttons))
 
 
 def reasoning_game():
@@ -137,8 +152,9 @@ def reasoning_game():
     When you are ready you must click the mouse. When you have done this the statement will disappear and a question about the statement will be shown together with two possible answers.
     You must now move the mouse pointer to the box which contains the correct answer. When you have done this, the next question will appear and so on until the end of the test.
 
-    The REASONING test runs for about 5 minutes. """
+    The REASONING test runs for about 3 minutes. """
     messagebox.showinfo(title="The ‘REASONING’ test", message=info_message)
+    buttons_disable(buttons)
 
     GAME_WINDOW = Toplevel(main_menu)
     GAME_WINDOW.title("Reasoning")
@@ -150,7 +166,7 @@ def reasoning_game():
     timer_label.grid(row=0, column=1)
 
     show_phase()
-    countdown_timer(5 * 60)
+    countdown_timer(3 * 60)
 
 
 # ---------------------------- PERCEPTUAL SPEED ------------------------------- #
@@ -173,6 +189,8 @@ def show_letters(letters_label: Label):
               f"   {perceptual_speed.lower_row[2]}   {perceptual_speed.lower_row[3]}"
     letters_label.config(text=letters)
 
+    GAME_WINDOW.protocol("WM_DELETE_WINDOW", lambda: buttons_enable(menu_buttons=buttons))
+
 
 def perceptual_speed_game():
     global GAME_WINDOW, timer_label, exercise
@@ -185,6 +203,7 @@ def perceptual_speed_game():
     The PERCEPTUAL SPEED test runs for about 4 minutes. """
 
     messagebox.showinfo(title="The ‘PERCEPTUAL SPEED’ test", message=info_message)
+    buttons_disable(buttons)
 
     GAME_WINDOW = Toplevel(main_menu)
     GAME_WINDOW.title("Perceptual Speed")
@@ -248,6 +267,8 @@ def show_numbers(option_0: Button, option_1: Button, option_2: Button):
     option_1.config(text=f"{number_speed.numbers[1]}")
     option_2.config(text=f"{number_speed.numbers[2]}")
 
+    GAME_WINDOW.protocol("WM_DELETE_WINDOW", lambda: buttons_enable(menu_buttons=buttons))
+
 
 def number_speed_game():
     global GAME_WINDOW, timer_label, exercise
@@ -260,6 +281,7 @@ def number_speed_game():
     The NUMBER SPEED & ACCURACY test runs for about 3 minutes. """
 
     messagebox.showinfo(title="The ‘NUMBER, SPEED & ACCURACY’ test", message=info_message)
+    buttons_disable(buttons)
 
     GAME_WINDOW = Toplevel(main_menu)
     GAME_WINDOW.title("Number Speed & Accuracy")
@@ -348,6 +370,8 @@ def show_images(pairs: list[Label]):
         pairs[index].image = images[index]
         pairs[index].config(image=images[index])
 
+    GAME_WINDOW.protocol("WM_DELETE_WINDOW", lambda: buttons_enable(menu_buttons=buttons))
+
 
 def spatial_visualisation_game():
     global GAME_WINDOW, timer_label, exercise
@@ -361,6 +385,7 @@ def spatial_visualisation_game():
     The SPATIAL VISUALISATION test runs for about 3 minutes. """
 
     messagebox.showinfo(title="The ‘SPATIAL VISUALISATION’ test", message=info_message)
+    buttons_disable(buttons)
 
     GAME_WINDOW = Toplevel(main_menu)
     GAME_WINDOW.title("Spatial Visualisation")
@@ -428,21 +453,25 @@ reasoning_game_button = Button(text="REASONING", highlightthickness=0)
 reasoning_game_button.config(fg=CHAMPAGNE_PINK, bg=MEDIUM_SLATE_BLUE, relief=GROOVE,
                              font=(FONT_NAME, 15, "bold"), command=reasoning_game)
 reasoning_game_button.grid(row=3, column=0, columnspan=5, pady=20, padx=50, sticky="ew")
+buttons.append(reasoning_game_button)
 
 perceptual_speed_game_button = Button(text="PERCEPTUAL SPEED", highlightthickness=0)
 perceptual_speed_game_button.config(fg=CHAMPAGNE_PINK, bg=MEDIUM_SLATE_BLUE, relief=GROOVE,
                                     font=(FONT_NAME, 15, "bold"), command=perceptual_speed_game)
 perceptual_speed_game_button.grid(row=4, column=0, columnspan=5, pady=10, padx=50, sticky="ew")
+buttons.append(perceptual_speed_game_button)
 
 number_speed_game_button = Button(text="NUMBER SPEED & ACCURACY", highlightthickness=0)
 number_speed_game_button.config(fg=CHAMPAGNE_PINK, bg=MEDIUM_SLATE_BLUE, relief=GROOVE,
                                 font=(FONT_NAME, 15, "bold"), command=number_speed_game)
 number_speed_game_button.grid(row=5, column=0, columnspan=5, pady=20, padx=50, sticky="ew")
+buttons.append(number_speed_game_button)
 
 spatial_visualisation_game_button = Button(text="SPATIAL VISUALISATION", highlightthickness=0)
 spatial_visualisation_game_button.config(fg=CHAMPAGNE_PINK, bg=MEDIUM_SLATE_BLUE, relief=GROOVE,
                                          font=(FONT_NAME, 15, "bold"), command=spatial_visualisation_game)
 spatial_visualisation_game_button.grid(row=6, column=0, columnspan=5, pady=10, padx=50, sticky="ew")
+buttons.append(spatial_visualisation_game_button)
 
 my_logo = PhotoImage(file="resources/my_logo.png")
 my_logo_label = Label(main_menu, image=my_logo, bg=GHOST_WHITE)
