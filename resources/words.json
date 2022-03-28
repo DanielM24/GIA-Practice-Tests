@@ -1,7 +1,7 @@
 [
   {
-    "word_1": "Adam",
-    "word_2": "Eve",
+    "word_1": "John",
+    "word_2": "Jane",
     "type": "nouns"
   },
   {
@@ -498,5 +498,70 @@
     "word_1": "original",
     "word_2": "clone",
     "type": "nouns"
+  },
+  {
+    "word_1": "new",
+    "word_2": "old",
+    "type": "adjective"
+  },
+  {
+    "word_1": "entry",
+    "word_2": "exit",
+    "type": "nouns"
+  },
+  {
+    "word_1": "ship",
+    "word_2": "boat",
+    "type": "nouns"
+  },
+  {
+    "word_1": "under",
+    "word_2": "over",
+    "type": "adverb"
+  },
+  {
+    "word_1": "ill",
+    "word_2": "sick",
+    "type": "adjective"
+  },
+  {
+    "word_1": "eager",
+    "word_2": "enthusiastic",
+    "type": "adjective"
+  },
+  {
+    "word_1": "bus",
+    "word_2": "taxi",
+    "type": "nouns"
+  },
+  {
+    "word_1": "unusual",
+    "word_2": "odd",
+    "type": "adjective"
+  },
+  {
+    "word_1": "jump",
+    "word_2": "leap",
+    "type": "verb"
+  },
+  {
+    "word_1": "too",
+    "word_2": "also",
+    "type": "adverb"
+  },
+  {
+    "word_1": "wet",
+    "word_2": "dry",
+    "type": "adjective"
+  },
+  {
+    "word_1": "danger",
+    "word_2": "safety",
+    "type": "nouns"
+  },
+  {
+    "word_1": "irritate",
+    "word_2": "annoy",
+    "type": "verb"
   }
 ]
