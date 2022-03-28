@@ -4,6 +4,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageTk
 from reasoning import Reasoning
 from perceptual_speed import PerceptualSpeed
 from number_speed import NumberSpeedAccuracy
+from word_meaning import WordMeaning
 from spatial_visualisation import SpatialVisualisation
 
 import numpy as np
@@ -43,6 +44,11 @@ def show_score():
     
     Do you want to download a report for the ‘NUMBER, SPEED & ACCURACY’ test?
         """
+    elif exercise == 4:
+        message = f"""    Your final score is: {word_meaning.score} / {word_meaning.questions - 1}.
+
+    Do you want to download a report for the ‘WORD MEANING’ test?
+        """
     else:
         message = f"""    Your final score is: {spatial_visualisation.score} / {spatial_visualisation.questions - 1}.
     
@@ -58,6 +64,8 @@ def show_score():
             perceptual_speed.save_report()
         elif exercise == 3:
             number_speed.save_report()
+        elif exercise == 4:
+            word_meaning.save_report()
         else:
             spatial_visualisation.save_report()
     else:
@@ -311,6 +319,69 @@ def number_speed_game():
     countdown_timer(3 * 60)
 
 
+# ---------------------------- WORD MEANING ------------------------------- #
+word_meaning = WordMeaning()
+
+
+def check_option_wm(option_0: Button, option_1: Button, option_2: Button, user_choice):
+    """ Check if the user has selected the correct answer."""
+    if word_meaning.check_answer(user_choice):
+        word_meaning.score += 1
+    # print(word_meaning.score)
+    show_words(option_0, option_1, option_2)
+
+
+def show_words(option_0: Button, option_1: Button, option_2: Button):
+    word_meaning.get_words()
+
+    option_0.config(text=f"{word_meaning.pair[0]}")
+    option_1.config(text=f"{word_meaning.pair[1]}")
+    option_2.config(text=f"{word_meaning.pair[2]}")
+
+    GAME_WINDOW.protocol("WM_DELETE_WINDOW", lambda: buttons_enable(menu_buttons=buttons))
+
+
+def word_meaning_game():
+    global GAME_WINDOW, timer_label, exercise
+    exercise = 4
+    word_meaning.score = 0
+    word_meaning.questions = 0
+    info_message = """    This is a test to see how quickly you can spot the odd word out in a group. 
+    You will be given three words. Two of the three will be related in some way, and the third is the odd one out. Each time, decide which is the odd one out and select it.
+
+    The WORD MEANING test runs for about 2 minutes. """
+
+    messagebox.showinfo(title="The ‘WORD MEANING’ test", message=info_message)
+    buttons_disable(buttons)
+
+    GAME_WINDOW = Toplevel(main_menu)
+    GAME_WINDOW.title("Word Meaning")
+    GAME_WINDOW.config(padx=25, pady=20, bg=GHOST_WHITE)
+    GAME_WINDOW.iconbitmap("resources/my_icon.ico")
+
+    option_0 = Button(GAME_WINDOW, highlightthickness=0)
+    option_0.config(fg=CHAMPAGNE_PINK, bg=MEDIUM_SLATE_BLUE, font=(FONT_NAME, 22, "bold"), relief=GROOVE,
+                    command=lambda: check_option_wm(option_0, option_1, option_2, word_meaning.pair[0]))
+    option_0.grid(row=1, column=0, pady=20, padx=20, sticky="ew")
+
+    option_1 = Button(GAME_WINDOW, highlightthickness=0)
+    option_1.config(fg=CHAMPAGNE_PINK, bg=MEDIUM_SLATE_BLUE, font=(FONT_NAME, 22, "bold"), relief=GROOVE,
+                    command=lambda: check_option_wm(option_0, option_1, option_2, word_meaning.pair[1]))
+    option_1.grid(row=1, column=1, pady=20, padx=20, sticky="ew")
+
+    option_2 = Button(GAME_WINDOW, highlightthickness=0)
+    option_2.config(fg=CHAMPAGNE_PINK, bg=MEDIUM_SLATE_BLUE, font=(FONT_NAME, 22, "bold"), relief=GROOVE,
+                    command=lambda: check_option_wm(option_0, option_1, option_2, word_meaning.pair[2]))
+    option_2.grid(row=1, column=2, pady=20, padx=20, sticky="ew")
+
+    timer_label = Label(GAME_WINDOW, text="TIME: 00:00", bg=GHOST_WHITE)
+    timer_label.config(fg=THISTLE, font=(FONT_NAME, 10, "bold"), anchor="ne")
+    timer_label.grid(row=0, column=3)
+
+    show_words(option_0, option_1, option_2)
+    countdown_timer(2 * 60)
+
+
 # ---------------------------- SPATIAL VISUALISATION ------------------------------- #
 spatial_visualisation = SpatialVisualisation()
 
@@ -375,7 +446,7 @@ def show_images(pairs: list[Label]):
 
 def spatial_visualisation_game():
     global GAME_WINDOW, timer_label, exercise
-    exercise = 4
+    exercise = 5
     spatial_visualisation.score = 0
     spatial_visualisation.questions = 0
     pairs = []
@@ -467,14 +538,20 @@ number_speed_game_button.config(fg=CHAMPAGNE_PINK, bg=MEDIUM_SLATE_BLUE, relief=
 number_speed_game_button.grid(row=5, column=0, columnspan=5, pady=20, padx=50, sticky="ew")
 buttons.append(number_speed_game_button)
 
+word_meaning_game_button = Button(text="WORD MEANING", highlightthickness=0)
+word_meaning_game_button.config(fg=CHAMPAGNE_PINK, bg=MEDIUM_SLATE_BLUE, relief=GROOVE,
+                                font=(FONT_NAME, 15, "bold"), command=word_meaning_game)
+word_meaning_game_button.grid(row=6, column=0, columnspan=5, pady=20, padx=50, sticky="ew")
+buttons.append(word_meaning_game_button)
+
 spatial_visualisation_game_button = Button(text="SPATIAL VISUALISATION", highlightthickness=0)
 spatial_visualisation_game_button.config(fg=CHAMPAGNE_PINK, bg=MEDIUM_SLATE_BLUE, relief=GROOVE,
                                          font=(FONT_NAME, 15, "bold"), command=spatial_visualisation_game)
-spatial_visualisation_game_button.grid(row=6, column=0, columnspan=5, pady=10, padx=50, sticky="ew")
+spatial_visualisation_game_button.grid(row=7, column=0, columnspan=5, pady=10, padx=50, sticky="ew")
 buttons.append(spatial_visualisation_game_button)
 
 my_logo = PhotoImage(file="resources/my_logo.png")
 my_logo_label = Label(main_menu, image=my_logo, bg=GHOST_WHITE)
-my_logo_label.grid(row=7, column=1, columnspan=3, sticky="ew")
+my_logo_label.grid(row=8, column=1, columnspan=3, sticky="ew")
 
 main_menu.mainloop()
