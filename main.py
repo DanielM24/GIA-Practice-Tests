@@ -167,7 +167,7 @@ def reasoning_game():
     GAME_WINDOW = Toplevel(main_menu)
     GAME_WINDOW.title("Reasoning")
     GAME_WINDOW.config(padx=50, pady=40, bg=GHOST_WHITE)
-    GAME_WINDOW.iconbitmap("resources/my_icon.ico")
+    GAME_WINDOW.wm_iconphoto(True, icon)
 
     timer_label = Label(GAME_WINDOW, text="TIME: 00:00", bg=GHOST_WHITE)
     timer_label.config(fg=THISTLE, font=(FONT_NAME, 10, "bold"), anchor="ne")
@@ -216,7 +216,7 @@ def perceptual_speed_game():
     GAME_WINDOW = Toplevel(main_menu)
     GAME_WINDOW.title("Perceptual Speed")
     GAME_WINDOW.config(padx=40, pady=20, bg=GHOST_WHITE)
-    GAME_WINDOW.iconbitmap("resources/my_icon.ico")
+    GAME_WINDOW.wm_iconphoto(True, icon)
 
     letters_label = Label(GAME_WINDOW, text="", bg=GHOST_WHITE)
     letters_label.config(fg=MEDIUM_SLATE_BLUE, font=(FONT_NAME, 40, "bold"), pady=20, padx=100)
@@ -294,7 +294,7 @@ def number_speed_game():
     GAME_WINDOW = Toplevel(main_menu)
     GAME_WINDOW.title("Number Speed & Accuracy")
     GAME_WINDOW.config(padx=25, pady=20, bg=GHOST_WHITE)
-    GAME_WINDOW.iconbitmap("resources/my_icon.ico")
+    GAME_WINDOW.wm_iconphoto(True, icon)
 
     option_0 = Button(GAME_WINDOW, highlightthickness=0)
     option_0.config(fg=CHAMPAGNE_PINK, bg=MEDIUM_SLATE_BLUE, font=(FONT_NAME, 22, "bold"), relief=GROOVE,
@@ -357,7 +357,7 @@ def word_meaning_game():
     GAME_WINDOW = Toplevel(main_menu)
     GAME_WINDOW.title("Word Meaning")
     GAME_WINDOW.config(padx=25, pady=20, bg=GHOST_WHITE)
-    GAME_WINDOW.iconbitmap("resources/my_icon.ico")
+    GAME_WINDOW.wm_iconphoto(True, icon)
 
     option_0 = Button(GAME_WINDOW, highlightthickness=0)
     option_0.config(fg=CHAMPAGNE_PINK, bg=MEDIUM_SLATE_BLUE, font=(FONT_NAME, 22, "bold"), relief=GROOVE,
@@ -461,7 +461,7 @@ def spatial_visualisation_game():
     GAME_WINDOW = Toplevel(main_menu)
     GAME_WINDOW.title("Spatial Visualisation")
     GAME_WINDOW.config(padx=50, pady=20, bg=GHOST_WHITE)
-    GAME_WINDOW.iconbitmap("resources/my_icon.ico")
+    GAME_WINDOW.wm_iconphoto(True, icon)
 
     pair_1_1 = Label(GAME_WINDOW)
     pair_1_1.grid(row=1, column=1)
@@ -505,7 +505,9 @@ def spatial_visualisation_game():
 # ---------------------------- MAIN MENU ------------------------------- #
 main_menu = Tk()
 main_menu.title("GIA Practice Tests")
-main_menu.iconbitmap("resources/my_icon.ico")
+icon = Image.open("resources/my_icon.ico")
+icon = ImageTk.PhotoImage(icon)
+main_menu.wm_iconphoto(True, icon)
 main_menu.config(padx=75, pady=40, bg=GHOST_WHITE)
 
 header_label = Label(text="THOMAS INTERNATIONAL", bg=GHOST_WHITE)
