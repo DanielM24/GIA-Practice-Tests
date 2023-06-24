@@ -9,6 +9,7 @@ from spatial_visualisation import SpatialVisualisation
 
 import numpy as np
 import PIL
+import random
 
 # ---------------------------- COLORS ------------------------------- #
 CHAMPAGNE_PINK = "#F2DFD7"
@@ -396,14 +397,19 @@ def check_option_sv(pairs: list[Label], user_choice):
     show_images(pairs)
 
 
+def choose_character():
+    return random.choice('RNSFPG')
+
+
 def draw_image(side, angle):
     """Generates a PIL Image of a drawn R with a given side and angle"""
+    global character
     letter_font = ImageFont.truetype('verdana.ttf', 80)
     # Create a new PIL image
     image = Image.new(mode="RGB", size=(100, 100), color="white")
     # Draw a black R on the image
     draw = ImageDraw.Draw(image)
-    draw.text((20, 1), "R", font=letter_font, fill='black', align='center', stroke_width=1,
+    draw.text((20, 1), character, font=letter_font, fill='black', align='center', stroke_width=1,
               stroke_fill='black')
     # Rotate the image
     image = image.rotate(angle)
@@ -427,6 +433,8 @@ def get_pairs_image(images: list):
 
 
 def show_images(pairs: list[Label]):
+    global character
+    character = choose_character()
     spatial_visualisation.get_pairs()
     images = []
     for pair in spatial_visualisation.pairs:
