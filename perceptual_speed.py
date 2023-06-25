@@ -125,3 +125,4 @@ class PerceptualSpeed:
         time_format = "%H-%M_%d-%m-%Y"
         date_time = time_now.strftime(time_format)
         pdf.output(f'reports/{date_time}_perceptual_speed_report.pdf', 'F')
+        self.report.clear()
