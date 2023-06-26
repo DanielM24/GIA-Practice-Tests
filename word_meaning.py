@@ -97,3 +97,4 @@ class WordMeaning:
         time_format = "%H-%M_%d-%m-%Y"
         date_time = time_now.strftime(time_format)
         pdf.output(f'reports/{date_time}_word_meaning_report.pdf', 'F')
+        self.report.clear()
